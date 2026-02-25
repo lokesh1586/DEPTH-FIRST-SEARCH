@@ -1,7 +1,7 @@
 # BREADTH-FIRST-SEARCH
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
-<h3>Name:  </h3>
-<h3>Register Number: </h3>
+<h3>Name:  LOKESH M</h3>
+<h3>Register Number: 212224040173</h3>
 <H3>Aim:</H3>
 <p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -67,6 +67,51 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 <li>Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes.</li>
 
 </ol>
+</ol>
+<h3>Code</h3> 
+<hr>
+from collections import defaultdict<br>
+import networkx as nx<br>
+import matplotlib.pyplot as plt<br>
+def dfs(graph,start,visited,path):<br>
+    visited[start] = True<br>
+    path.append(start)<br>
+    for neighbour in graph[start]:<br>
+        if visited[neighbour]==False:<br>
+            dfs(graph, neighbour, visited, path)<br>
+            visited[neighbour]=True<br>
+    return path<br>
+ def bfs(graph,start,visited,path):<br>
+    '''Fill in the Code Here'''<br>
+    queue = deque()<br>
+    queue.append(start)<br>
+    path.append(start)<br>
+    visited[start] = True<br>
+    while len(queue)!=0:<br>
+        tmpnode = queue.popleft()<br>
+        for n in graph[tmpnode]:<br>
+            if visited[n]==False:<br>
+                path.append(n)<br>
+                queue.append(n)<br>
+                visited[n]=True<br>
+    return path<br> 
+ graph = defaultdict(list)<br>
+G = nx.Graph()<br>
+nodes , edges = map(int, input().split())<br>
+for _ in range(edges):<br>
+    u,v=map(str,input().split())<br>
+    G.add_edge(u,v)<br>
+    graph[u].append(v)<br>
+    graph[v].append(u)<br>
+#print(graph)<br>
+start = input()<br>
+visited = defaultdict(bool)<br>
+path = []<br>
+traversedpath = dfs(graph,start,visited,path)<br>
+print(traversedpath)<br>
+pos=nx.spring_layout(G)<br>
+nx.draw(G,pos,with_labels=True,node_color="lightblue",edge_color="red",node_size=2000)<br>
+plt.show()<br>
 
 <hr>
 <h3>Sample Input</h3>
